@@ -1,0 +1,13 @@
+#This is a formula for the pythagorean theorem. 
+#This formula assumes the user is looking to solve for 'c', but still has the capability of solving for 'a' or 'b'.
+#To instead solve for 'a' or 'b', explicitly define your 'c' arguement in addition to the first argument.
+#Arguments should be entered as their side lengths only, no squaring necessary.
+
+pyth_thrm <- function(a , b , c = 0){
+  a_ent <- a > 0
+  b_ent <- b > 0
+  c_ent <- c > 0
+  
+  sqrt(isTRUE(a_ent & b_ent)*(a^2+b^2))+sqrt(isTRUE(a_ent & c_ent)*(c^2-a^2))+sqrt(isTRUE(b_ent & c_ent)*(c^2-b^2))
+  
+}
