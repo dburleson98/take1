@@ -1,4 +1,4 @@
-#This is a formula for the pythagorean theorem. 
+#This is a formula for the pythagorean theorem created in R Studio. 
 #This formula assumes the user is looking to solve for 'c', but still has the capability of solving for 'a' or 'b'.
 #To instead solve for 'a' or 'b', explicitly define your 'c' arguement in addition to the first argument.
 #Arguments should be entered as their side lengths only, no squaring necessary.
