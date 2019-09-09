@@ -1,0 +1,13 @@
+# This is a function written in python made to indicate which numbers 
+# in an inputted numeric vector are odd and which are even.
+
+def evenodd(vec):
+    enum = []
+    onum = []
+    for n in vec:
+        if n%2==0:
+            enum.append(n)
+        else:
+            onum.append(n)    
+    print("Even Numbers: " , enum)
+    print("Odd Numbers: " , onum)
