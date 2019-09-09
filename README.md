@@ -1,2 +1,2 @@
-First attempt at creating and modifying a repository’s branches on github.
+First repository on github.
 Files will be added as notable code is created in coursework or in free time.
