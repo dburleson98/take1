@@ -1,0 +1,50 @@
+# This is a monte carlo simulation for an insurance company that has
+# a defined probability ('cprob') of $x claim payout ('cpay') 
+# along with a daily income ('inc'). Program will run a specified number 
+# of iterations ('nitr') as defined by user.
+# Each iteration contains a defined maximum number of days ('maxdays')
+# within it, or the iteration will stop if the account balance ('bal') 
+# goes negative, whichever occurs first.
+
+cprob = 0.5
+# 'cprob' can be modified based on historical data or experience with 
+# probability of a claim made on any given day.
+cpay = 20
+# 'cpay' can be modified based on historical data on average claim payout.
+inc = 10
+# 'inc' can be modified to indicate daily income of company.
+bal = 0
+# 'bal' can be given a beginnning balance to signify cash on hand
+# or initial investment.
+maxdays = 500
+nitr = 500
+nbroke = 0
+totitrs = nitr
+
+# Variable 'nbroke' , allows for recording of each iteration that results
+# in account balance ('bal') running dry. 
+# Variable 'totitrs' is the total number of iterations that will be used
+# to finally compute the probability of going broke based off simulation.
+
+import random
+
+while nitr > 0:
+    nitr = nitr - 1
+    while maxdays > 0:
+        maxdays = maxdays - 1
+        bal = bal + inc
+        rprob = random.random()
+        if rprob < cprob:
+            bal = bal - cpay
+            if bal < 0:
+                nbroke = nbroke + 1
+                break
+            # Given the balance goes below zero, this will be recorded and 
+            # another iteration will be ran starting from the initially 
+            # specified balance (as long as there is a balance remaining 
+            # in the 'nitr' value.
+pbroke = nbroke / totitrs
+print("Probability of going broke:" , pbroke)
+
+# Example final output:
+# "Probability of going broke: 0.068"
