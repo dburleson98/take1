@@ -1,5 +1,5 @@
-# This is a monte carlo simulation for an insurance company that has
-# a defined probability ('cprob') of $x claim payout ('cpay') 
+# This is a monte carlo simulation for an insurance company created in Python. 
+# Arguments include a defined probability ('cprob') of $x claim payout ('cpay') 
 # along with a daily income ('inc'). Program will run a specified number 
 # of iterations ('nitr') as defined by user.
 # Each iteration contains a defined maximum number of days ('maxdays')
