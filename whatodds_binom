@@ -4,7 +4,7 @@
 # (2) Probability of greater than the given number of successes.            |  all out of a given number of 'n' trials.
 # (3) Probability of exactly the given number of successes.                 |
 
-whatodds <- function(prob_of_success, num_of_success, total_trials){
+whatodds_binom <- function(prob_of_success, num_of_success, total_trials){
   p <- prob_of_success
   # 'p' argument specifies the probability of success for any given trial.
   f <- 1 - prob_of_success
