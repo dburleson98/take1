@@ -1,0 +1,51 @@
+'''
+This program pulls profile descriptions of stock 
+tickers from Yahoo Finance. User will have to ensure the 
+tickers are correct specifically for Yahoo Finance.
+'''
+from bs4 import BeautifulSoup
+import requests
+import time
+# Import libraries
+
+def ticker_desc(tickers_list): 
+    file = open("ticker_desc.csv", "w")
+    # Open file in writing mode
+    for ticker in tickers_list:
+        url = f'https://finance.yahoo.com/quote/{ticker}/profile'
+        # Define a url to follow
+        response = requests.get(url)
+        # Call the webpage provided by url
+        raw_html = response.text
+        # Record raw html response retrieved from url
+        html_soup = BeautifulSoup(raw_html, 'lxml')
+        # Parse raw html response into callable items
+        p_tag = html_soup.find_all('p', class_= "Mt(15px) Lh(1.6)")[0]
+        # Call any objects with paragraph class, index for appropriate item
+        desc = p_tag.text
+        # Pull only the text from returned paragraph object
+        
+        text = ""
+        index = 0
+        for char in range(len(desc)):
+            if desc[char] == ",":
+                text = text + desc[index:char]
+                index = char + 1      
+        file.write(f'{ticker}, {text} \n')
+        # Write respctive information to csv file
+        time.sleep(2)
+        # Wait 2 seconds to avoid being overbearing on yahoo.com
+    file.close()
+    # Close csv file
+
+'''
+Lines 28-33: Create an empty text string to store final description. Next, 
+scan the 'desc' variable using for loop to find any commas. Accumulate 
+characters in 'text' variable, using if statement to skip commas. We want to
+remove commas so we can put the entire description in just one cell 
+in the csv file.
+'''
+
+# Trying it out: 
+tlist = ["GOOG", "TSLA", "AAPL", "NKE"]
+ticker_desc(tlist)
