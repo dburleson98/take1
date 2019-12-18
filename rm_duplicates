@@ -1,0 +1,11 @@
+# This is a very simple program made in R to removed duplicate objects from a list.
+# Note, this could work for any type of object, assuming all objects in the list are of the same type.
+
+def remove_dup(list):
+    removed = []
+    for i in list:
+        if i in removed:
+            continue
+        else:
+            removed.append(i)
+    return removed
