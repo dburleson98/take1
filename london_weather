@@ -1,0 +1,39 @@
+'''
+This is a web scraping function built to pull the current day, next day, and day after of hourly weather data.
+It will pull the local date and time along with the temperature in Fahrenheit and put this into a numpy array.
+In another function, 'weather_plt', we could use this numpy array to create a simple plot showing the outlook more visually.
+'''
+
+def london_weather():
+    from bs4 import BeautifulSoup
+    import requests
+    import time
+    import numpy as np
+    def remove_junk(words):
+        for i in range(len(words)):
+            words[i] = words[i].replace('\n','')
+            words[i] = words[i].replace('\t','')
+            words[i] = words[i].replace(' ','')
+            words[i] = words[i].replace('°','')
+        return words
+    hourly_temp = []
+    date = []
+    for day in (1, 2, 3):
+        url = f'https://www.accuweather.com/en/gb/london/ec4a-2/hourly-weather-forecast/328328?day={day}'
+        agent = {"User-Agent":'Mozilla/5.0'}
+        response = requests.get(url, headers = agent)
+        html_doc = response.text
+        soup = BeautifulSoup(html_doc, 'lxml')
+        time.sleep(2)
+        for i in range(len(soup.find_all('div', class_ = 'date'))):
+            t_tag = soup.find_all('div', class_ = 'temp')[i]
+            hourly_temp.append(t_tag.text)
+            hourly_temp = remove_junk(hourly_temp)
+            h_tag = soup.find_all('div', class_ = 'date')[i]
+            date.append(h_tag.text)
+            date = remove_junk(date)
+    for ypoint in range(len(hourly_temp)):
+        hourly_temp[ypoint] = int(hourly_temp[ypoint])   
+    arr = np.array([hourly_temp, date])
+    arr = np.rot90(arr,  k = 3)
+    return arr
