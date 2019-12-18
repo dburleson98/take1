@@ -1,19 +1,13 @@
 def hangman():
-'''
-This program will allow the user to play a game of hangman. 
+# This program will allow the user to play a game of hangman. 
 
-These guesses will then be checked to see if they’re present in the word. 
-If they are, it will be revealed, and the game will continue. 
-If not, a deduction to the incorrect guesses allowance will be made and the game will only continue if there are any guesses remaining.
-'''
-# Here we initialize a few vairables and a function to be used later.
+# Here we are just initializing a few vairables and a function to be used later.
     import random
     def split(word):
         letters = []
         for i in range(len(word)):
             letters.append(word[i])
         return letters
-    
     t1 = " O"
     t2 = " |"
     t3 = "/|"
