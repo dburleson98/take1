@@ -1,0 +1,18 @@
+'''
+The program takes 2 lists as inputs: x-axis and y-axis data (these must be the same length). 
+Using these, we will create a pre-formatted plot for the temperature outlook for however long the data goes on. 
+This plot will be returned to the user as well as automatically saved to the hard drive.
+We can easily use the numpy array created in the webscraping function 'london_weather' as the program's inputs.
+'''
+
+def weather_plt(dates, temps):
+    import matplotlib.pyplot as plt
+    if len(dates) != len(temps):
+        return "Error! Each x-axis value must have an accompanying y-axis value."
+    plt.figure(figsize=(20,10))
+    plt.plot(dates, temps)
+    plt.xlabel('Time & Date')
+    plt.ylabel('° Fahrenheit')
+    plt.xticks(rotation = 'vertical')
+    plt.title('London 3-Day Hourly Weather Outlook')
+    plt.savefig('weather.png')
