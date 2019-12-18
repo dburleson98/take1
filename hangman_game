@@ -1,0 +1,97 @@
+def hangman():
+'''
+This program will allow the user to play a game of hangman. 
+
+These guesses will then be checked to see if they’re present in the word. 
+If they are, it will be revealed, and the game will continue. 
+If not, a deduction to the incorrect guesses allowance will be made and the game will only continue if there are any guesses remaining.
+'''
+# Here we initialize a few vairables and a function to be used later.
+    import random
+    def split(word):
+        letters = []
+        for i in range(len(word)):
+            letters.append(word[i])
+        return letters
+    
+    t1 = " O"
+    t2 = " |"
+    t3 = "/|"
+    t4 = "/|\\"
+    t5 = "/"
+    t6 = "/ \\"
+    
+# The user will first specify whether there are one or two players. 
+    players = int(input("Enter 1 or 2 for number of players."))
+    if players == 0:
+        return "Can't play without people. Try again."
+    if players > 2:
+        return "Can't play with more than 2 people. Try again."
+    if players == 1:
+# If there’s one player, a random word will be generated from a list of possibilities. 
+        wlist = ['people', 'history', 'way', 'art', 'world', 'information', 'map', 'two', 'family', 'government', 'health', 'system', 'computer', 'meat', 'year', 'thanks', 'music', 'person', 'reading', 'method', 'data', 'food', 'understanding', 'theory', 'law', 'bird', 'literature', 'problem', 'software', 'control', 'knowledge', 'power', 'ability', 'economics', 'love', 'internet', 'television', 'science', 'library', 'nature']
+        word = random.choice(wlist)
+    if players == 2:
+# If there are two players, one of the players will be asked to enter a word that the other player will be guessing. 
+        word = input("Enter the word to be guessed.")
+        word = word.lower()
+    letters = split(word)
+    lsorted = sorted(letters)
+    guessed = []
+    tries = 6
+    blankword = len(letters)*"-"
+    blankword = split(blankword)
+    lguesses = []
+# Following word selection, the guessing user will then be asked to input guesses of letters. 
+    while tries > 0:
+        guess = input("Guess a letter:")
+        guess = guess.lower()
+        while len(guess) > 1:
+            guess = input("One letter at a time please. Try again:")
+            guess = guess.lower()
+# If this guess has already been made, they'll have to try again.
+        while guess in guessed:
+            guess = input("You already guessed that letter. Try another:")
+            guess = guess.lower()
+# Finally a guess is added to letters already guessed.
+        guessed.append(guess)
+        correct = []
+# Using indexing, we can slowly reveal the word to the user as well only when a correct letter has been guessed.
+        for posi in range(len(letters)):
+            if letters[posi] == guess:
+                correct.append(posi)
+        if len(correct) > 0:
+            print("That letter is in the word!")
+            for posi in range(len(correct)):
+                blankword[correct[posi]] = guess
+                lguesses.append(guess)
+            print(blankword)
+        else:
+            print("That letter in not in the word!")
+            tries = tries - 1
+            print(f'You have {tries} incorrect guesses remaining.')
+            print(blankword)
+        glsorted = sorted(lguesses)
+        if lsorted == glsorted:
+            return print("You win!")
+# Here we print out a certain amount of body parts of the stick figure based on how many bad tries are left.
+        if tries == 5:
+            print(t1)
+        elif tries == 4:
+            print(t1)
+            print(t2)
+        elif tries == 3:
+            print(t1)
+            print(t3)
+        elif tries == 2:
+            print(t1)
+            print(t4)
+        elif tries == 1:
+            print(t1)
+            print(t4)
+            print(t5)
+        elif tries == 0:
+            print(t1)
+            print(t4)
+            print(t6)
+            return print(f'You ran out of tries! Game over. The correct word was: {str(word)}.')
