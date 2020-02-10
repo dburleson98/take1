@@ -3,12 +3,13 @@ This program pulls profile descriptions of stock
 tickers from Yahoo Finance. User will have to ensure the 
 tickers are correct specifically for Yahoo Finance.
 '''
-from bs4 import BeautifulSoup
-import requests
-import time
-# Import libraries
+
 
 def ticker_desc(tickers_list): 
+    from bs4 import BeautifulSoup
+    import requests
+    import time
+    # Import libraries
     file = open("ticker_desc.csv", "w")
     # Open file in writing mode
     for ticker in tickers_list:
